@@ -14,6 +14,8 @@ The supported queue frameworks are:
 - [Resque](https://github.com/resque/resque)
 - [Delayed Job](https://github.com/collectiveidea/delayed_job) (via the [ActiveRecord backend](https://github.com/collectiveidea/delayed_job_active_record))
 
+If you are using the Rails `ActionDispatch::HostAuthorization` middleware (through e.g. `config.hosts`), we suggest [excluding the metrics endpoint](https://guides.rubyonrails.org/configuring.html#actiondispatch-hostauthorization) from host authorization using `config.host_authorization.exclude`.
+
 ### Configuration
 You can configure this gem by creating a file in your Rails initializers (e.g. `config/initializers/cloud66.rb`) and adding the following (values shown are the defaults):
 ```ruby
