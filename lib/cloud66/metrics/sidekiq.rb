@@ -19,7 +19,12 @@ module Cloud66
         def queue_array_concrete
           sidekiq_pending = ::Sidekiq::Queue.all.map { |q| [q.name, q.size] }.to_h
 
-          sidekiq_working_array = ::Sidekiq::WorkSet.new.map { |_, _, work| work["queue"] }
+          # extract queue names from currently processing jobs
+          # note: in sidekiq 7.2+, work is a Sidekiq::Work object with a .queue method
+          # in older versions, it work responds to [] for hash-style access
+          sidekiq_working_array = ::Sidekiq::WorkSet.new.map do |_, _, work|
+            work.respond_to?(:queue) ? work.queue : work["queue"]
+          end
           sidekiq_working = ::Hash.new(0).tap { |h| sidekiq_working_array.each { |queue| h[queue] += 1 } }
 
           result = []
