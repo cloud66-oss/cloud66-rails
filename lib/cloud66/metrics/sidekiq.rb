@@ -21,7 +21,7 @@ module Cloud66
 
           # extract queue names from currently processing jobs
           # note: in sidekiq 7.2+, work is a Sidekiq::Work object with a .queue method
-          # in older versions, it work responds to [] for hash-style access
+          # in older versions, work responds to [] for hash-style access
           sidekiq_working_array = ::Sidekiq::WorkSet.new.map do |_, _, work|
             work.respond_to?(:queue) ? work.queue : work["queue"]
           end
