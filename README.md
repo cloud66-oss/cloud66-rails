@@ -10,7 +10,7 @@ This endpoint will detect which supported queue frameworks your application uses
 - How many jobs are currently being processed in a given queue
 
 The supported queue frameworks are:
-- [Sidekiq](https://github.com/sidekiq/sidekiq)
+- [Sidekiq (7+)](https://github.com/sidekiq/sidekiq)
 - [Resque](https://github.com/resque/resque)
 - [Delayed Job](https://github.com/collectiveidea/delayed_job) (via the [ActiveRecord backend](https://github.com/collectiveidea/delayed_job_active_record))
 
