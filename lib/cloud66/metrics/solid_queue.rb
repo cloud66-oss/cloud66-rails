@@ -7,14 +7,15 @@ module Cloud66
         protected
 
         def detected_concrete
-          return ::Gem.loaded_specs.key?("solid_queue") &&
-                 ::Object.const_defined?(:SolidQueue) &&
-                 ::SolidQueue.const_defined?(:ReadyExecution) &&
-                 ::SolidQueue.const_defined?(:ClaimedExecution)
+          ::Gem.loaded_specs.key?("solid_queue") &&
+            ::Object.const_defined?(:SolidQueue) &&
+            ::SolidQueue.const_defined?(:Job) &&
+            ::SolidQueue.const_defined?(:ReadyExecution) &&
+            ::SolidQueue.const_defined?(:ClaimedExecution)
         end
 
         def name_concrete
-          return "solid_queue"
+          "solid_queue"
         end
 
         def queue_array_concrete
