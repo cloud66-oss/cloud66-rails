@@ -36,7 +36,7 @@ module Cloud66
             }
           end
 
-          return result
+          result
         end
       end
     end
