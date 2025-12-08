@@ -31,8 +31,8 @@ module Cloud66
           solid_queue_waiting = solid_queue_pending.merge(solid_queue_due_scheduled) { |_key, ready, scheduled| ready + scheduled }
 
           # Get processing jobs per queue from claimed executions
-          # ClaimedExecution doesn't have queue_name directly, need to join with job
-          solid_queue_working = ::SolidQueue::ClaimedExecution.joins(:job).group("solid_queue_jobs.queue_name").count
+          # Using Job.joins approach since queue_name is directly on Job
+          solid_queue_working = ::SolidQueue::Job.joins(:claimed_execution).group(:queue_name).count
 
           result = []
           solid_queue_queue_names = solid_queue_waiting.keys | solid_queue_working.keys
